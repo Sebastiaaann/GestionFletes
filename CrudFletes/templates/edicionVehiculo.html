@@ -1,0 +1,65 @@
+{% extends "./Base.html" %}
+
+{% block tittle%}Gestion de Fletes {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-4 off-set-md-4">
+        <h2>Editar Vehiculo</h2>
+        <div class="card-body">
+            <form action="/editarVehiculo/" method="POST">{% csrf_token %}
+                <div class="form-group">
+                    <input type="text" id="txtCodigo" name="txtCodigo"  value="{{curso.codigo}}" class="form-control" placeholder="Codigo" minlength="1" 
+                    maxlength="7"  required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" id="txtNombre" name="txtNombre" value="{{vehiculo.nombre}}" class="form-control" placeholder="Nombre" 
+                    maxlength="50" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" id="txtModelo" name="txtModelo" value="{{vehiculo.modelo}}" class="form-control" placeholder="Modelo" 
+                    maxlength="50" required>
+                </div>
+
+                <div class="form-group">
+                    <input type="text" id="numPatente" name="numPatente" value="{{vehiculo.patente}}" class="form-control"  minlength="6" placeholder="Patente" 
+                    maxlength="6" readonly required>
+                </div>
+
+                <div class="form-group">
+                    <label for="txtFechaUltimoMant">Fecha Último Adquisicion:</label>
+                    <input type="date" id="txtfechaAdquisicion" value="{{vehiculo.fechaAdquisicion}}" name="txtfechaAdquisicion" class="form-control"  
+                    maxlength="60" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="txtFechaUltimoMant">Fecha Último Mantenimiento:</label>
+                    <input type="date" id="txtFechaUltimoMant" value="{{vehiculo.fechaUltimoMant}}" name="txtFechaUltimoMant" class="form-control" 
+                    maxlength="60" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" id="txtOtrosDetalles" name="txtOtrosDetalles" value="{{vehiculo.otrosDetalles}}"  class="form-control" placeholder="Detalles" 
+                    maxlength="60" required>
+                </div>
+                
+                <div class="form-group">
+                    <input type="text" id="txtEstado" name="txtEstado" value="{{vehiculo.estado}}" class="form-control" placeholder="Estado (Activo/Inactivo)" 
+                    maxlength="60" required>
+                    
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success text-white">Guardar</button>
+                    
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Vehiculos
+from .models import Conductores
 
 # Register your models here.
-admin.site.register(Vehiculos)
 
+admin.site.register(Conductores)

@@ -17,18 +17,17 @@ class Vehiculos(models.Model):
         texto= "{0} {1} {2} {3} {4} {5} {6} {7}"
         return texto.format(self.codigo, self.nombre, self.modelo, self.patente, self.fechaAdquisicion, self.fechaUltimoMant, self.otrosDetalles, self.estado)
 
-        
 
 
 
-#tabla de vehiculos
-#marca
-#modelo
-#patente
-#fecha de adquision
-#fecha de ultimo mantenimiento
-#otros detalles del vehiculo
-#estado (activo, inactivo, en mantenimiento)
+
+#tabla de conductores
+#nombre
+#apellido
+#fecha de nacimiento
+#direccion
+#numero de licencia
+#otros detalles del conductor
 
 #tabla de mantenimiento
 #vehiculo
@@ -45,11 +44,3 @@ class Vehiculos(models.Model):
 #carga transportada
 #otros detalles del recorrido
 
-
-#tabla de conductores
-#nombre
-#apellido
-#fecha de nacimiento
-#direccion
-#numero de licencia
-#otros detalles del conductor

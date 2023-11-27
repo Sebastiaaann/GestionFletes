@@ -22,7 +22,7 @@ def registarVehiculo(request):
     vehiculo=Vehiculos.objects.create(codigo=codigo, nombre=nombre, modelo=modelo, patente=patente, fechaAdquisicion=fechaAdquisicion, 
                                       fechaUltimoMant=fechaUltimoMant, otrosDetalles=otrosDetalles, estado=estado)
     messages.success(request, 'Vehiculo registrado correctamente')
-    return redirect('/')
+    return redirect('home')
 
 def edicionVehiculo(request, codigo):
     vehiculo = Vehiculos.objects.get(codigo=codigo)

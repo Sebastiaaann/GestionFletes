@@ -1,0 +1,86 @@
+{% extends "Base.html" %}
+
+{% load widget_tweaks %}
+
+{% block tittle%}Gestion de Mantenciones{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        {% if messages%}
+        {% for message in messages %}
+        <div class="alert alert-dismissible alert-success">
+            <strong class="text-dark"> {{message}}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        
+        <h2>Gestion de Mantenciones</h2>
+        <div class="card">
+            <div class="card-body">
+                <form method="post" class="mt-3">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.codigo.label_tag }}
+                        {% render_field form.codigo class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.vehiculo.label_tag }}
+                        {% render_field form.vehiculo class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.fecha.label_tag }}
+                        {% render_field form.fecha class="form-control" type="date" %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.valor.label_tag }}
+                        {% render_field form.valor class="form-control" %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+                
+                  {% if form.errors %}
+                    <div class="alert alert-danger mt-3">
+                      <strong>Error:</strong> Corrige los errores indicados.
+                    </div>
+                  {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado De Mantenciones</h1>
+        <div class="table responsive py-2">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Codigo</th>
+                        <th>Vehiculo</th>
+                        <th>Fecha de Mantencion</th>
+                        <th>Costo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for mantencion in mantenciones %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{mantencion.codigo}}</td>
+                        <td>{{mantencion.vehiculo}}</td>
+                        <td>{{mantencion.fecha}}</td>
+                        <td>{{mantencion.valor}}</td>
+                        <td><a href="{% url 'edicionMantencion' mantencion.codigo %}" class="btn btn-info">Editar</a></td>
+                        <td><a href="{% url 'eliminarMantencion' mantencion.codigo %}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                    
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+
+</div>
+
+
+
+{% endblock %}

@@ -1,56 +1,69 @@
 {% extends "Base.html" %}
 
-{% block tittle%}<h1>Menu</h1> {% endblock %}
+{% block tittle%}Home {% endblock %}
 
 {% block body %}
-<div class="card mb-3">
-    <div class="card-header">
-        Sección
+<header class="bg-dark text-white text-center py-4">
+  <h1 class="display-4">GestionFletes</h1>
+</header>
+
+<div class="row">
+  <div class="col-md-6 p-4">
+    <div class="card bg-black card-project">
+      <div class="card-body">
+        <h5 class="card-title text-white">Gestion de Conductores</h5>
+        <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar conductores de la base de datos.</p>
+        <a href="{% url 'homeConductores' %}" class="btn btn-primary">Acceder</a>
+      </div>
     </div>
-    <div class="card-body">
-      <h5 class="card-title">Gestion de Conductores</h5>
-      <p class="card-text">Ver, Agregar, Actualizar y Eliminar conductores de la base de datos.</p>
-      <a href="{% url 'homeConductores' %}" class="btn btn-primary">Acceder</a>
-    </div>
-</div>
-<div class="card mb-3">
-    <div class="card-header">
-        Sección
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Gestion de Vehiculos</h5>
-      <p class="card-text">Ver, Agregar, Actualizar y Eliminar vehiculos de la base de datos.</p>
+  </div>
+
+  <div class="col-md-6 p-4">
+    <div class="card bg-black card-project">
+      <div class="card-body">
+        <h5 class="card-title text-white">Gestion de Vehiculos</h5>
+      <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar vehiculos de la base de datos.</p>
       <a href="{% url 'homeVehiculos' %}" class="btn btn-primary">Acceder</a>
+
+      </div>
     </div>
+  </div>
 </div>
-<div class="card mb-3">
-    <div class="card-header">
-        Sección
+
+<div class="row">
+  <div class="col-md-6 p-4">
+    <div class="card bg-black card-project">
+      <div class="card-body">
+        <h5 class="card-title text-white">Gestion de Ingresos y Egresos</h5>
+        <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar reportes de ingresos y egresos de la base de datos.</p>
+        <a href="https://sebastiaaann.github.io/Ingresos-y-gastos/" target="_blank" class="btn btn-primary">Acceder</a>
+      </div>
     </div>
-    <div class="card-body">
-      <h5 class="card-title">Gestion de Ingresos y Egresos</h5>
-      <p class="card-text">Ver, Agregar, Actualizar y Eliminar reportes de ingresos y egresos de la base de datos.</p>
-      <a href="#" class="btn btn-primary">Acceder</a>
+  </div>
+
+  <div class="col-md-6 p-4">
+    <div class="card bg-black card-project">
+      <div class="card-body">
+        <h5 class="card-title text-white">Gestion de Mantenciones</h5>
+        <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar reportes de mantenciones de la base de datos.</p>
+        <a href="#" class="btn btn-primary">Acceder</a>
+      </div>
     </div>
+  </div>
 </div>
-<div class="card mb-3">
-    <div class="card-header">
-        Sección
+
+<div class="row">
+  <div class="col-md-6 p-4">
+    <div class="card bg-black card-project">
+      <div class="card-body">
+        <h5 class="card-title text-white">Gestion de Recorridos</h5>
+        <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar recorridos de la base de datos.</p>
+        <a href="#" class="btn btn-primary">Acceder</a>
+      </div>
     </div>
-    <div class="card-body">
-      <h5 class="card-title">Gestion de Mantenciones</h5>
-      <p class="card-text">Ver, Agregar, Actualizar y Eliminar reportes de mantenciones de la base de datos.</p>
-      <a href="#" class="btn btn-primary">Acceder</a>
-    </div>
+  </div>
 </div>
-<div class="card mb-3">
-    <div class="card-header">
-        Sección
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Gestion de Recorridos</h5>
-      <p class="card-text">Ver, Agregar, Actualizar y Eliminar recorridos de la base de datos.</p>
-      <a href="#" class="btn btn-primary">Acceder</a>
-    </div>
-</div>
+
+
+
 {% endblock %}

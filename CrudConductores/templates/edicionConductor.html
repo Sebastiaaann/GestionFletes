@@ -10,40 +10,44 @@
         <div class="card">
             <div class="card-body">
                 <form action="{% url 'editarConductor' %}" method="POST">{% csrf_token %}
-                    <div class="form-group">
+                    <div class="form-group mb-3">
+                        <label>Rut:</label>
                         <input type="text" id="txtRut" name="txtRut" class="form-control" value="{{conductores.rut}}" placeholder="Ingrese su Rut" 
                         minlength="10" maxlength="10" readonly  required >
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
+                        <label>Nombre:</label>
                         <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{conductores.nombre}}"  placeholder="Nombre" maxlength="50"   required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
+                        <label>Apellidos:</label>
                         <input type="text" id="txtApellido" name="txtAppellido" value="{{conductores.apellido}}"  class="form-control" placeholder="Apellidos" maxlength="50" required>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="dateNacimiento">Fecha de Nacimiento:</label>
+                    <div class="form-group mb-3">
+                        <label>Fecha de Nacimiento:</label>
                         <input type="date" id="txtDateNacimiento" name="txtDateNacimiento" value="{{conductores.fechaNacimiento}}" class="form-control" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
+                        <label>Direccion:</label>
                         <input type="text" id="txtDireccion" name="txtDireccion" class="form-control"value="{{conductores.direccion}}" placeholder="Direccion" maxlength="50" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
+                        <label>Licencia:</label>
                         <input type="text" id="txtNlicencia" name="txtNlicencia" class="form-control" value="{{conductores.numeroLicencia}}" placeholder="Numero de Licencia"  minlength="10" maxlength="12" readonly required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
+                        <label>Detalles:</label>
                         <input type="text" id="txtOtrosDetalles" name="txtOtrosDetalles" class="form-control" value="{{conductores.otrosDetalles}}" placeholder="Ingrese algun detalle" maxlength="50" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <button type="submit" class="btn btn-success text-white">Guardar</button>
-                        <button><a href="https://sebastiaaann.github.io/Ingresos-y-gastos/" class="btn btn-success text-white">Ir a Ingresos y Gastos</a></button>
-                        
                     </div>
                     
                     

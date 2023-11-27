@@ -8,7 +8,6 @@
         {% if messages%}
         {% for message in messages %}
         <div class="alert alert-dismissible alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
             <strong class="text-dark"> {{message}}</strong>
         </div>
         {% endfor %}
@@ -17,40 +16,44 @@
         <h2>Gestion de conductores</h2>
         <div class="card">
             <div class="card-body">
-                <form action="/registrarConductor/" method="POST">{% csrf_token %}
-                    <div class="form-group">
+                <form action="{% url 'registrarConductor' %}" method="POST">{% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label>Rut:</label>
                         <input type="text" id="txtRut" name="txtRut" class="form-control" placeholder="Ingrese su Rut" minlength="10" maxlength="10" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
+                        <label>Nombre:</label>
                         <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" maxlength="50"  required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
+                        <label>Apallidos:</label>
                         <input type="text" id="txtApellido" name="txtAppellido" class="form-control" placeholder="Apellidos" maxlength="50" required>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="dateNacimiento">Fecha de Nacimiento:</label>
+                    <div class="form-group mb-3">
+                        <label>Fecha de Nacimiento:</label>
                         <input type="date" id="txtDateNacimiento" name="txtDateNacimiento" class="form-control" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
+                        <label>Direccion:</label>
                         <input type="text" id="txtDireccion" name="txtDireccion" class="form-control" placeholder="Direccion" maxlength="50" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
+                        <label>Licencia:</label>
                         <input type="text" id="txtNlicencia" name="txtNlicencia" class="form-control" placeholder="Numero de Licencia" minlength="10" maxlength="12" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
+                        <label>Detalles:</label>
                         <input type="text" id="txtOtrosDetalles" name="txtOtrosDetalles" class="form-control" placeholder="Ingrese algun detalle" maxlength="50" required>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mb-3">
                         <button type="submit" class="btn btn-success text-white">Guardar</button>
-                        <button><a href="https://sebastiaaann.github.io/Ingresos-y-gastos/" class="btn btn-success text-white">Ir a Ingresos y Gastos</a></button>
-                        
                     </div>
                     
                     
@@ -89,8 +92,8 @@
                         <td>{{conductor.numeroLicencia}}</td>
                         <td>{{conductor.otrosDetalles}}</td>
 
-                        <td><a href="edicionConductor/{{conductor.rut}}" class="btn btn-info">Editar</a></td>
-                        <td><a href="eliminacionConductor/{{conductor.rut}}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                        <td><a href="{% url 'edicionConductor' conductor.rut %}" class="btn btn-info">Editar</a></td>
+                        <td><a href="{% url 'eliminacionConductor' conductor.rut %}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
                     
                     </tr>
                     {% endfor %}

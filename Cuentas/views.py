@@ -1,16 +1,18 @@
-from django.shortcuts import render
-from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import render, redirect
+from .forms import RegistroUsuarioForm
 from django.contrib import messages
 
 # Create your views here.
 def regitro(request):
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegistroUsuarioForm(request.POST)
         if form.is_valid():
+            form.save()
             nombre = form.cleaned_data['username']
-            messages.success(request, f'usuario {nombre} creado')
+            messages.success(request, f'Usuario {nombre} creado')
+            return redirect('login')
     else:
-        form = UserCreationForm()
+        form = RegistroUsuarioForm()
     
     context = {'form': form}
 

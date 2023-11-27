@@ -21,7 +21,7 @@ def registrarConductor(request):
     conductores = Conductores.objects.create(rut=rut, nombre=nombre, apellido=apellido, fechaNacimiento=fechaNacimiento, 
                                              direccion=direccion, numeroLicencia=numeroLicencia, otrosDetalles=otrosDetalles)
     messages.success(request, 'Conductor Registrado Correctamente!')
-    return redirect('HomeConductores')
+    return redirect('homeConductores')
 
 
 def eliminacionConductor(request,rut):
@@ -30,7 +30,7 @@ def eliminacionConductor(request,rut):
 
     messages.success(request, 'Conductor Eliminado Correctamente!')
 
-    return redirect('HomeConductores')
+    return redirect('homeConductores')
 
 def edicionConductor(request,rut):
     conductores = Conductores.objects.get(rut=rut)
@@ -58,7 +58,7 @@ def editarConductor(request):
 
     messages.success(request, 'Conductor Editado Correctamente!')
 
-    return redirect('HomeConductores')
+    return redirect('homeConductores')
 
 
 

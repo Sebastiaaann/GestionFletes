@@ -3,12 +3,8 @@
 {% block tittle%}<h1> Registro de Usuarios</h1> {% endblock %}
 
 {% block body %}
-<form method="post">
-
-    {% csrf_token %}
-    {{ form.as_p }}
-
-    <button type="submit" class="btn btn-success">Registrar</button>
+<div>
+    <h1>Usuario Deslogeado</h1>
     <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
-</form>
+</div>
 {% endblock %}

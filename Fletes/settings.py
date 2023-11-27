@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'CrudFletes',
     'Cuentas',
     'CrudConductores',
+    'Home',
 ]
 
 MIDDLEWARE = [

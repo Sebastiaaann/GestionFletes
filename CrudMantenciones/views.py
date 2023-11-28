@@ -10,14 +10,18 @@ def homeMantenciones(request):
     return render(request, 'gestionMantenciones.html', {'mantenciones': mantenciones,'form':form})
 
 def registrarMantencion(request):
-    if request == 'POST':
+    if request.method == 'POST':
         form = MantencionForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Conductor Registrado Correctamente!')
             return redirect('homeMantenciones')
+        else:
+            print(form.errors)  # Muestra los errores en la consola para debug
+            messages.error(request, 'Error al registrar la mantención. Por favor, verifica los datos.')
     else:
-        return redirect('/')
+        form = MantencionForm()
+    return redirect('/')
 
 
 def eliminarMantencion(request,codigo):
@@ -30,22 +34,18 @@ def eliminarMantencion(request,codigo):
 
 def edicionMantencion(request,codigo):
     mantencion = Mantenciones.objects.get(codigo=codigo)
-    return render(request, 'edicionMantencion.html', {'mantencion':mantencion})
+    form = MantencionForm(request.POST, instance=mantencion)
+    return render(request, 'edicionMantenciones.html', {'form':form, 'mantencion': mantencion})
 
-def editarMantencion(request):
-    codigo=request.POST['txtCodigo']
-    vehiculo=request.POST['txtVehiculo']
-    fecha=request.POST['txtFecha']
-    valor=request.POST['txtValor']
-
+def editarMantencion(request,codigo):
     mantencion = Mantenciones.objects.get(codigo=codigo)
+    if request.method == 'POST':
+        form = MantencionForm(request.POST, instance=mantencion)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Mantencion Editada Correctamente!')
+            return redirect('homeMantenciones')  
+    else:
+        form = MantencionForm()
 
-    mantencion.codigo=codigo
-    mantencion.vehiculo=vehiculo
-    mantencion.fecha=fecha
-    mantencion.valor=valor
-    mantencion.save()
-
-    messages.success(request, 'Mantencion Editada Correctamente!')
-
-    return redirect('homeMantenciones')
+    return redirect('/')

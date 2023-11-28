@@ -7,7 +7,7 @@
     <div class="col-md-4 off-set-md-4">
         <h2>Editar Vehiculo</h2>
         <div class="card-body">
-            <form action="/editarVehiculo/" method="POST">{% csrf_token %}
+            <form action="{% url 'editarVehiculo' %}" method="POST">{% csrf_token %}
                 <div class="form-group">
                     <input type="text" id="txtCodigo" name="txtCodigo"  value="{{curso.codigo}}" class="form-control" placeholder="Codigo" minlength="1" 
                     maxlength="7"  required>

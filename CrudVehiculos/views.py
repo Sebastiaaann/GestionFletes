@@ -22,7 +22,7 @@ def registarVehiculo(request):
     vehiculo=Vehiculos.objects.create(codigo=codigo, nombre=nombre, modelo=modelo, patente=patente, fechaAdquisicion=fechaAdquisicion, 
                                       fechaUltimoMant=fechaUltimoMant, otrosDetalles=otrosDetalles, estado=estado)
     messages.success(request, 'Vehiculo registrado correctamente')
-    return redirect('home')
+    return redirect('homeVehiculos')
 
 def edicionVehiculo(request, codigo):
     vehiculo = Vehiculos.objects.get(codigo=codigo)
@@ -50,7 +50,7 @@ def editarVehiculo(request):
     
     messages.success(request, 'Vehiculo editado correctamente!')
 
-    return redirect('/')
+    return redirect('homeVehiculos')
 
 
 def delVehiculo(request, codigo):
@@ -58,4 +58,4 @@ def delVehiculo(request, codigo):
     vehiculo.delete()
     
     messages.success(request, 'Vehiculo eliminado correctamente!')
-    return redirect('/')
+    return redirect('homeVehiculos')

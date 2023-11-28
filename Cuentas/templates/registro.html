@@ -1,14 +1,31 @@
 {% extends "Base.html" %}
 
-{% block tittle%}Registro de Usuarios{% endblock %}
+{% block title %}Registro de Usuarios{% endblock %}
 
 {% block body %}
-<form method="post">
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Registro de Usuarios</h2>
 
-    {% csrf_token %}
-    {{ form.as_p }}
+            <form method="post">
+              {% csrf_token %}
+              {{ form.as_p }}
 
-    <button type="submit" class="btn btn-success">Registrar</button>
-    <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
-</form>
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-success">Registrar</button>
+              </div>
+            </form>
+
+            <div class="text-center mt-3">
+              <p class="mb-0">¿Ya tienes una cuenta?</p>
+              <a class="btn btn-primary" href="{% url 'login' %}" role="button">Iniciar Sesión</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

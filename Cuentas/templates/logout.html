@@ -1,10 +1,18 @@
 {% extends "Base.html" %}
 
-{% block tittle%}Registro de Usuarios{% endblock %}
+{% block title %}Usuario Desconectado{% endblock %}
 
 {% block body %}
-<div>
-    <h1>Usuario Deslogeado</h1>
-    <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
-</div>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body text-center">
+            <h1 class="mb-4">Usuario Desconectado</h1>
+            <a class="btn btn-primary" href="{% url 'login' %}" role="button">Iniciar Sesión</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock %}

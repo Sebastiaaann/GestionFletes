@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Cuentas',
     'CrudConductores',
     'CrudMantenciones',
+    'CrudRecorridos',
     'Home',
 ]
 

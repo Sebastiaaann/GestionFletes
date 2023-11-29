@@ -60,7 +60,7 @@
                     <tr>
                         <td>{{forloop.counter}}</td>
                         <td>{{mantencion.codigo}}</td>
-                        <td>{{mantencion.vehiculo}}</td>
+                        <td>{{mantencion.vehiculo.codigo}}</td>
                         <td>{{mantencion.fecha}}</td>
                         <td>{{mantencion.valor}}</td>
                         <td><a href="{% url 'edicionMantencion' mantencion.codigo %}" class="btn btn-info">Editar</a></td>

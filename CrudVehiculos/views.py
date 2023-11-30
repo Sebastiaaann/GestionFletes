@@ -1,61 +1,40 @@
 from django.shortcuts import render, redirect
 from .models import Vehiculos
+from .forms import VehiculosForm
 from django.contrib import messages
 
-# Create your views here.
-def home(request):
-    vehiculosListados = Vehiculos.objects.all()
-    
-    return render(request,"GestionFletes.html", { "vehiculos": vehiculosListados})
+def registarVehiculos(request):
+    vehiculos = Vehiculos.objects.all()
+    if request.method == 'POST':
+        form = VehiculosForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Vehiculo Registrado Correctamente!')
+            return redirect('registarVehiculos')
+        else:
+            messages.error(request, 'Error al registrar el vehiculo. Por favor, verificar los datos.')
+            return render(request,'gestionVehiculos.html', {"form":form, "vehiculos":vehiculos})
+    else:
+        form = VehiculosForm()
+        return render(request,'gestionVehiculos.html', {"form":form, "vehiculos":vehiculos})
 
+def edicionVehiculos(request, vehiculoID):
+    vehiculo = Vehiculos.objects.get(vehiculoID=vehiculoID)
+    if request.method == 'POST':
+        form = VehiculosForm(request.POST, instance=vehiculo)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Vehiculo Editado Correctamente!')
+            return redirect('registarVehiculos')
+        else:
+            messages.error(request, 'Error al editar el vehiculo. Por favor, verifica los datos.')
+            return render(request, 'edicionVehiculos.html', {'form':form,"vehiculoID":vehiculoID})
+    else:
+        form = VehiculosForm(instance=vehiculo)
+        return render(request, 'edicionVehiculos.html', {'form':form,"vehiculoID":vehiculoID})
 
-def registarVehiculo(request):
-    codigo=request.POST['txtCodigo']
-    nombre=request.POST['txtNombre']
-    modelo=request.POST['txtModelo']
-    patente=request.POST['numPatente']
-    fechaAdquisicion=request.POST['txtfechaAdquisicion']
-    fechaUltimoMant=request.POST['txtFechaUltimoMant']
-    otrosDetalles=request.POST['txtOtrosDetalles']
-    estado=request.POST['txtEstado']
-
-    vehiculo=Vehiculos.objects.create(codigo=codigo, nombre=nombre, modelo=modelo, patente=patente, fechaAdquisicion=fechaAdquisicion, 
-                                      fechaUltimoMant=fechaUltimoMant, otrosDetalles=otrosDetalles, estado=estado)
-    messages.success(request, 'Vehiculo registrado correctamente')
-    return redirect('homeVehiculos')
-
-def edicionVehiculo(request, codigo):
-    vehiculo = Vehiculos.objects.get(codigo=codigo)
-    return render(request, "edicionVehiculo.html", {"vehiculo": vehiculo})
-
-def editarVehiculo(request):
-    codigo=request.POST['txtCodigo']
-    nombre=request.POST['txtNombre']
-    modelo=request.POST['txtModelo']
-    patente=request.POST['numPatente']
-    fechaAdquisicion=request.POST['txtfechaAdquisicion']
-    fechaUltimoMant=request.POST['txtFechaUltimoMant']
-    otrosDetalles=request.POST['txtOtrosDetalles']
-    estado=request.POST['txtEstado']
-
-    vehiculo = Vehiculos.objects.get(codigo=codigo)
-    vehiculo.nombre=nombre
-    vehiculo.modelo=modelo
-    vehiculo.patente=patente
-    vehiculo.fechaAdquisicion=fechaAdquisicion
-    vehiculo.fechaUltimoMant=fechaUltimoMant
-    vehiculo.otrosDetalles=otrosDetalles
-    vehiculo.estado=estado
-    vehiculo.save()
-    
-    messages.success(request, 'Vehiculo editado correctamente!')
-
-    return redirect('homeVehiculos')
-
-
-def delVehiculo(request, codigo):
-    vehiculo = Vehiculos.objects.get(codigo=codigo)
+def eliminarVehiculos(request, vehiculoID):
+    vehiculo = Vehiculos.objects.get(vehiculoID=vehiculoID)
     vehiculo.delete()
-    
-    messages.success(request, 'Vehiculo eliminado correctamente!')
-    return redirect('homeVehiculos')
+    messages.success(request, 'Vehiculo Eliminado Correctamente!')
+    return redirect('registarVehiculos')

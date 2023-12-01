@@ -6,8 +6,8 @@
 
 {% block body %}
 <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
-        <h2 >Gestion de conductores</h2>
+    <div class="col-md-4 offset-md-4 ">
+        <h2>Edicion de conductores</h2>
         {% if messages %}
         {% for message in messages %}
         {% if message.tags == "error"%}
@@ -23,7 +23,7 @@
         {% endif %}
         <div class="card">
             <div class="card-body">
-                <form action="{% url 'registrarConductores' %}" method="POST">
+                <form action="{% url 'editarConductores' conductorID %}" method="POST">
                     {% csrf_token %}
                     <div class="mb-3">
                         {{ form.rut.label_tag }}
@@ -60,42 +60,5 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
-        <h1>Listado De Conductores</h1>
-        <div class="table responsive py-2">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Rut</th>
-                        <th>Nombre</th>
-                        <th>Apellido</th>
-                        <th>Fecha Nacimiento</th>
-                        <th>Direccion</th>
-                        <th>Numero Licencia</th>
-                        <th colspan="2">Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for conductor in conductores %}
-                    <tr>
-                        <td>{{conductor.conductorID}}</td>
-                        <td>{{conductor.rut}}</td>
-                        <td>{{conductor.nombre}}</td>
-                        <td>{{conductor.apellido}}</td>
-                        <td>{{conductor.fechaNacimiento}}</td>
-                        <td>{{conductor.direccion}}</td>
-                        <td>{{conductor.licencia}}</td>
-                        <td><a href="{% url 'editarConductores' conductor.conductorID %}" class="btn btn-info">Editar</a></td>
-                        <td><a href="{% url 'eliminarConductores' conductor.conductorID %}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
 </div>
-
-
-
 {% endblock %}

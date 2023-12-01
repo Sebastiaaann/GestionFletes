@@ -27,17 +27,17 @@
                     {% csrf_token %}
                     <div class="mb-3">
                         {{ form.patente.label_tag }}
-                        {% render_field form.patente class="form-control" %}
+                        {% render_field form.patente class="form-control" placeholder="Ej: AABB11" minlength="6" maxlength="6" %}
                         {{form.patente.errors}}
                     </div>
                     <div class="mb-3">
                         {{ form.marca.label_tag }}
-                        {% render_field form.marca class="form-control" %}
+                        {% render_field form.marca class="form-control" maxlength="30" %}
                         {{form.marca.errors}}
                     </div>
                     <div class="mb-3">
                         {{ form.modelo.label_tag }}
-                        {% render_field form.modelo class="form-control" %}
+                        {% render_field form.modelo class="form-control" maxlength="50" %}
                         {{form.modelo.errors}}
                     </div>
                     <div class="mb-3">
@@ -51,9 +51,9 @@
                         {{form.estado.errors}}
                     </div>
                     <div class="mb-3">
-                        {{ form.comentarios.label_tag }}
-                        {% render_field form.comentarios class="form-control" %}
-                        {{form.comentarios.errors}}
+                        {{ form.comentario.label_tag }}
+                        {% render_field form.comentario class="form-control" %}
+                        {{form.comentario.errors}}
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>
@@ -85,7 +85,7 @@
                         <td>{{vehiculo.modelo}}</td>
                         <td>{{vehiculo.fechaAdquisicion}}</td>
                         <td>{{vehiculo.estado}}</td>
-                        <td>{{vehiculo.comentarios}}</td>
+                        <td>{{vehiculo.comentario}}</td>
                         <td><a href="{% url 'edicionVehiculos' vehiculo.vehiculoID %}"
                                 class="btn btn-primary">Editar</a></td>
                         <td><a href="{% url 'eliminarVehiculos' vehiculo.vehiculoID %}"

@@ -3,49 +3,38 @@ from django.contrib import messages
 from .models import Mantenciones
 from .forms import MantencionForm
 
-# Create your views here.
-def homeMantenciones(request):
+def registrarMantenciones(request):
     mantenciones = Mantenciones.objects.all()
-    form = MantencionForm
-    return render(request, 'gestionMantenciones.html', {'mantenciones': mantenciones,'form':form})
-
-def registrarMantencion(request):
     if request.method == 'POST':
         form = MantencionForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Conductor Registrado Correctamente!')
-            return redirect('homeMantenciones')
+            messages.success(request, 'Mantencion Registrada Correctamente!')
+            return redirect('registrarMantenciones')
         else:
-            print(form.errors)  # Muestra los errores en la consola para debug
-            messages.error(request, 'Error al registrar la mantención. Por favor, verifica los datos.')
+            messages.error(request, 'Error al registrar la mantencion. Por favor, verificar los datos.')
+            return render(request,'gestionMantenciones.html', {"form":form, "mantenciones":mantenciones})
     else:
         form = MantencionForm()
-    return redirect('/')
+        return render(request,'gestionMantenciones.html', {"form":form, "mantenciones":mantenciones})
 
-
-def eliminarMantencion(request,codigo):
-    mantencion = Mantenciones.objects.get(codigo=codigo)
-    mantencion.delete()
-
-    messages.success(request, 'Mantencion Eliminada Correctamente!')
-
-    return redirect('homeMantenciones')
-
-def edicionMantencion(request,codigo):
-    mantencion = Mantenciones.objects.get(codigo=codigo)
-    form = MantencionForm(request.POST, instance=mantencion)
-    return render(request, 'edicionMantenciones.html', {'form':form, 'mantencion': mantencion})
-
-def editarMantencion(request,codigo):
-    mantencion = Mantenciones.objects.get(codigo=codigo)
+def editarMantenciones(request, mantencionID):
+    mantencion = Mantenciones.objects.get(mantencionID=mantencionID)
     if request.method == 'POST':
         form = MantencionForm(request.POST, instance=mantencion)
         if form.is_valid():
             form.save()
             messages.success(request, 'Mantencion Editada Correctamente!')
-            return redirect('homeMantenciones')  
+            return redirect('registrarMantenciones')
+        else:
+            messages.error(request, 'Error al editar la mantencion. Por favor, verifica los datos.')
+            return render(request, 'edicionMantenciones.html', {'form':form,"mantencionID":mantencionID})
     else:
-        form = MantencionForm()
+        form = MantencionForm(instance=mantencion)
+        return render(request, 'edicionMantenciones.html', {'form':form,"mantencionID":mantencionID})
 
-    return redirect('/')
+def eliminarMantenciones(request,mantencionID):
+    mantencion = Mantenciones.objects.get(mantencionID=mantencionID)
+    mantencion.delete()
+    messages.success(request,'Mantencion Eliminada Correctamente!')
+    return redirect('registrarMantenciones')

@@ -1,13 +1,13 @@
 from django.db import models
 from CrudVehiculos.models import Vehiculos
 
-# Create your models here.
 class Mantenciones(models.Model):
-    codigo = models.CharField(primary_key=True, max_length=6)
+    mantencionID = models.AutoField(primary_key=True)
     vehiculo = models.ForeignKey(Vehiculos, on_delete=models.CASCADE)
-    fecha = models.DateField()
+    fechaInicio = models.DateField()
+    duracion = models.PositiveIntegerField()
     valor = models.PositiveIntegerField()
 
     def __str__(self):
-        texto= "{0} {1} {2} {3}"
-        return texto.format(self.codigo, self.vehiculo, self.fecha, self.valor)
+        texto= "{0} {1} {2} {3} {4}"
+        return texto.format(self.mantencionID, self.vehiculo, self.fechaInicio, self.duracion, self.valor)

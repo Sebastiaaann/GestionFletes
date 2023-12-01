@@ -8,11 +8,17 @@
 <div class="row">
     <div class="col-md-4 offset-md-4">
         <h2>Editar Vehiculo</h2>
-        {% if messages%}
+        {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-dismissible alert-success">
-            <strong class="text-dark"> {{message}}</strong>
+        {% if message.tags == "error"%}
+        <div class="alert alert-danger">
+            {{ message }}
         </div>
+        {% else %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endif %}
         {% endfor %}
         {% endif %}
         <div class="card">
@@ -21,17 +27,17 @@
                     {% csrf_token %}
                     <div class="mb-3">
                         {{ form.patente.label_tag }}
-                        {% render_field form.patente class="form-control" %}
+                        {% render_field form.patente class="form-control" placeholder="Ej: AABB11" minlength="6" maxlength="6" %}
                         {{form.patente.errors}}
                     </div>
                     <div class="mb-3">
                         {{ form.marca.label_tag }}
-                        {% render_field form.marca class="form-control" %}
+                        {% render_field form.marca class="form-control" maxlength="30" %}
                         {{form.marca.errors}}
                     </div>
                     <div class="mb-3">
                         {{ form.modelo.label_tag }}
-                        {% render_field form.modelo class="form-control" %}
+                        {% render_field form.modelo class="form-control" maxlength="50" %}
                         {{form.modelo.errors}}
                     </div>
                     <div class="mb-3">
@@ -45,9 +51,9 @@
                         {{form.estado.errors}}
                     </div>
                     <div class="mb-3">
-                        {{ form.comentarios.label_tag }}
-                        {% render_field form.comentarios class="form-control" %}
-                        {{form.comentarios.errors}}
+                        {{ form.comentario.label_tag }}
+                        {% render_field form.comentario class="form-control" %}
+                        {{form.comentario.errors}}
                     </div>
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </form>

@@ -6,4 +6,4 @@ class VehiculosForm(forms.ModelForm):
     fechaAdquisicion = forms.DateField(label='Fecha de Adquisicion')
     class Meta:
         model = Vehiculos
-        fields = ['patente','marca','modelo','fechaAdquisicion','estado','comentarios']
+        fields = ['patente','marca','modelo','fechaAdquisicion','estado','comentario']

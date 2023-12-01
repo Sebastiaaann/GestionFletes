@@ -3,23 +3,23 @@
 {% block tittle%}Home {% endblock %}
 
 {% block body %}
-<header class="bg-dark text-white text-center py-4">
+<header class="card bg-dark text-white text-center py-4">
   <h1 class="display-4">Gestion Fletes</h1>
 </header>
 
 <div class="row">
   <div class="col-md-6 p-4">
-    <div class="card bg-black card-project">
+    <div class="card text-white bg-dark">
       <div class="card-body">
         <h5 class="card-title text-white">Gestion de Conductores</h5>
         <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar conductores de la base de datos.</p>
-        <a href="{% url 'homeConductores' %}" class="btn btn-success">Acceder</a>
+        <a href="{% url 'registrarConductores' %}" class="btn btn-success">Acceder</a>
       </div>
     </div>
   </div>
 
   <div class="col-md-6 p-4">
-    <div class="card bg-black card-project">
+    <div class="card text-white bg-dark">
       <div class="card-body">
         <h5 class="card-title text-white">Gestion de Vehiculos</h5>
         <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar vehiculos de la base de datos.</p>
@@ -48,7 +48,7 @@
         <h5 class="card-title text-white">Gestion de Mantenciones</h5>
         <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar reportes de mantenciones de la base de
           datos.</p>
-        <a href="{% url 'homeMantenciones' %}" class="btn btn-success">Acceder</a>
+        <a href="{% url 'registrarMantenciones' %}" class="btn btn-success">Acceder</a>
       </div>
     </div>
   </div>

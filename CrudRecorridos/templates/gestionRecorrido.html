@@ -20,19 +20,35 @@
             <div class="card-body">
                 <form action="{% url 'registrarRecorridos' %}" method="POST">
                     {% csrf_token %}
-                    <label for="codigoInput">Codigo:</label>
-                    <input type="text" id="codigoInput" name="codigoInput" class="form-control" placeholder="ingrese codigo" required>
-                    <label for="conductorInput">Conductor:</label>
-                    <input type="text" id="conductorInput" name="conductorInput" class="form-control" placeholder="ingrese conductor" required>
-                    <label for="fechaInput">Fecha:</label>
-                    <input type="date" id="fechaInput" name="fechaInput" class="form-control" required>
-                    <label for="rutaInput">Ruta:</label>
-                    <input type="text" id="rutaInput" name="rutaInput" class="form-control" required>
-                    <label for="cargaTransportadaInput"> Carga Transportada:</label>
-                    <input type="text" id="cargaTransportadaInput" name="cargaTransportadaInput" class="form-control" required>
-                    <label for="detallesRecorridoInput">Detalles del recorrido:</label>
-                    <textarea id="detallesRecorridoInput" name="detallesRecorridoInput" class="form-control" required></textarea>
-                    <button type="submit" class="btn btn-success text-white mt-3">Crear recorrido</button>
+                    <div class="mb-3">
+                        {{ form.conductor.label_tag }}
+                        {% render_field form.conductor class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.vehiculo.label_tag }}
+                        {% render_field form.vehiculo class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.fecha.label_tag }}
+                        {% render_field form.fecha class="form-control" type="date"%}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.cargaTransportada.label_tag }}
+                        {% render_field form.cargaTransportada class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.rutaRecorrido.label_tag }}
+                        {% render_field form.rutaRecorrido class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.ganancia.label_tag }}
+                        {% render_field form.ganancia class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.gasto.label_tag }}
+                        {% render_field form.gasto class="form-control" %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
                  </form>
             </div>
         </div>
@@ -43,30 +59,32 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Codigo</th>
+                    <th>ID</th>
                     <th>Conductor</th>
+                    <th>Vehiculo</th>
                     <th>Fecha</th>
+                    <th>Carga</th>
                     <th>Ruta</th>
-                    <th>CargaTransportada</th>
-                    <th>DetallesRecorrido</th>
+                    <th>Ganancia</th>
+                    <th>gasto</th>
                     <th colspan="2">Opciones</th>
                 </tr>
                 </thead>
-                {%for recorrido in recorrido%}
+                {%for recorrido in recorridos%}
                 <tbody>
                 <tr>
-                    <td>{{forloop.counter}}</td>
-                    <td>{{recorrido.codigo}}</td>
+                    <td>{{recorrido.recorridoID}}</td>
                     <td>{{recorrido.conductor}}</td>
+                    <td>{{recorrido.vehiculo}}</td>
                     <td>{{recorrido.fecha}}</td>
-                    <td>{{recorrido.ruta}}</td>
-                    <td>{{recorrido.cargaTransportada}}
-                    <td>{{recorrido.detallesRecorrido}}</td>
+                    <td>{{recorrido.cargaTransportada}}</td>
+                    <td>{{recorrido.rutaRecorrido}}
+                    <td>{{recorrido.ganancia}}</td>
+                    <td>{{recorrido.gasto}}</td>
                     <td>
-                        <a href ="{%url 'edicionRecorridos' recorrido.codigo %}" class = "btn btn-info" >Editar </a>
+                        <a href ="{%url 'editarRecorridos' recorrido.recorridoID %}" class = "btn btn-info" >Editar </a>
                     </td>
-                    <td><a href ="{%url 'eliminarRecorridos' recorrido.codigo %}" class = "btn btn-danger btnEliminacion" >Eliminar </a></td>
+                    <td><a href ="{%url 'eliminarRecorridos' recorrido.recorridoID %}" class = "btn btn-danger btnEliminacion" >Eliminar </a></td>
                 </tr>
                 </tbody>
                 {% endfor %}

@@ -1,58 +1,42 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Recorridos
+from .forms import RecorridosForm
 
-# Create your views here.
 def registrarRecorridos(request):
-    codigo = request.POST['codigoInput']
-    conductor = request.POST['conductorInput']
-    fecha = request.POST['fechaInput']
-    ruta = request.POST['rutaInput']
-    cargaTransportada = request.POST['cargaTransportadaInput']
-    detalleRecorridos = request.POST['detallesRecorridoInput']
-    recorrido = Recorridos.objects.create(
-        codigo=codigo, conductor=conductor, fecha=fecha, ruta=ruta, cargaTransportada=cargaTransportada, detalleRecorridos=detalleRecorridos)
-    messages.success(request,'Recorrido ingresado Correctamente')
-    return redirect('homeRecorridos')
+    recorridos = Recorridos.objects.all()
+    if request.method == 'POST':
+        form = RecorridosForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Recorrido Registrado Correctamente!')
+            return redirect('registrarRecorridos')
+        else:
+            messages.error(request, 'Error al registrar el recorrido. Por favor, verificar los datos.')
+            return render(request,'gestionRecorrido.html', {"form":form, "recorridos":recorridos})
+    else:
+        form = RecorridosForm()
+        return render(request,'gestionRecorrido.html', {"form":form, "recorridos":recorridos})
 
-#listar recorridos
-def homeRecorridos(request):
-    recorrido = Recorridos.objects.all()
-    return render (request, "gestionRecorrido.html",{"recorrido": recorrido})
-
-def edicionRecorridos(request,codigo):
-    recorrido = Recorridos.objects.get(codigo=codigo)
-    return render(request, "edicionRecorrido.html", {"recorrido": recorrido})
-
-#editar recorridos
-def editarRecorridos(request):
-    
-    codigo = request.POST['codigoInput']
-    conductor = request.POST['conductorInput']
-    fecha = request.POST['fechaInput']
-    ruta = request.POST['rutaInput']
-    cargaTransportada = request.POST['cargaTransportadaInput']
-    detallesRecorridos = request.POST['detallesRecorridosInput']
-    
-    recorrido = Recorridos.objects.get(codigo=codigo)
-
-    recorrido.codigo = codigo
-    recorrido.conductor = conductor
-    recorrido.fecha = fecha
-    recorrido.ruta = ruta
-    recorrido.cargaTransportada = cargaTransportada
-    recorrido.detalleRecorridos = detallesRecorridos
-    recorrido.save()
-    
-    messages.success(request, 'Recorrido editado Correctamente')
-    
-    return redirect('homeRecorridos')
+def editarRecorridos(request, recorridoID):
+    recorrido = Recorridos.objects.get(recorridoID=recorridoID)
+    if request.method == 'POST':
+        form = RecorridosForm(request.POST, instance=recorrido)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Recorrido Editada Correctamente!')
+            return redirect('registrarRecorridos')
+        else:
+            messages.error(request, 'Error al editar el recorrido. Por favor, verifica los datos.')
+            return render(request, 'editarRecorrido.html', {'form':form,"recorridosID":recorridosID})
+    else:
+        form = RecorridosForm(instance=recorrido)
+        return render(request, 'editarRecorrido.html', {'form':form,"recorridosID":recorridosID})
 
 
-#eliminar recorridos
-def eliminarRecorridos(request, codigo):
-    recorrido = Recorridos.objects.get(codigo=codigo)
+def eliminarRecorridos(request, recorridoID):
+    recorrido = Recorridos.objects.get(recorridoID=recorridoID)
     recorrido.delete()
     messages.success(request, 'Recorrido eliminado exitosamente!')
-    return redirect('homeRecorridos')
+    return redirect('registrarRecorridos')
   

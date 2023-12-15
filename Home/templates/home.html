@@ -4,66 +4,48 @@
 
 {% block body %}
 <header class="card bg-dark text-white text-center py-4">
-  <h1 class="display-4">Gestion Fletes</h1>
+  <h1 class="display-4"> Evento Deportivo</h1>
+  
+  <div class="col-md4">
+    <img src="" alt="" />
+  </div>
+
+  <div class="col-md8 my-auto">
+    <h1><strong></strong></h1>
+    <h3></h3>
+    <p>
+      
+    </p>
+
+  </div>
 </header>
 
-<div class="row">
+
+
+<div class="row text-center">
   <div class="col-md-6 p-4">
-    <div class="card text-white bg-dark">
-      <div class="card-body">
-        <h5 class="card-title text-white">Gestion de Conductores</h5>
-        <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar conductores de la base de datos.</p>
-        <a href="{% url 'registrarConductores' %}" class="btn btn-success">Acceder</a>
+    <div class="card bg-dark ">
+      <div class="card-body ">
+        <h5 class="card-title text-white">Gestion de atletas</h5>
+        <p class="card-text text-white"></p>
+        <a href="{% url 'registrarAtleta' %}" class="btn btn-success">Acceder</a>
       </div>
     </div>
   </div>
 
   <div class="col-md-6 p-4">
-    <div class="card text-white bg-dark">
+    <div class="card bg-dark ">
       <div class="card-body">
-        <h5 class="card-title text-white">Gestion de Vehiculos</h5>
-        <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar vehiculos de la base de datos.</p>
-        <a href="{% url 'registarVehiculos' %}" class="btn btn-success">Acceder</a>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-md-6 p-4">
-    <div class="card bg-black card-project">
-      <div class="card-body">
-        <h5 class="card-title text-white">Gestion de Ingresos y Egresos</h5>
-        <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar reportes de ingresos y egresos de la base de
-          datos.</p>
-        <a href="https://sebastiaaann.github.io/Ingresos-y-gastos/" target="_blank" class="btn btn-success">Acceder</a>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-6 p-4">
-    <div class="card bg-black card-project">
-      <div class="card-body">
-        <h5 class="card-title text-white">Gestion de Mantenciones</h5>
-        <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar reportes de mantenciones de la base de
-          datos.</p>
-        <a href="{% url 'registrarMantenciones' %}" class="btn btn-success">Acceder</a>
+        <h5 class="card-title text-white">Registro Eventos</h5>
+        <p class="card-text text-white"></p>
+        <a href="{% url 'registrarEvento' %}" class="btn btn-success">Acceder</a>
       </div>
     </div>
   </div>
 </div>
 
 <div class="row">
-  <div class="col-md-6 p-4">
-    <div class="card bg-black card-project">
-      <div class="card-body">
-        <h5 class="card-title text-white">Gestion de Recorridos</h5>
-        <p class="card-text text-white">Ver, Agregar, Actualizar y Eliminar recorridos de la base de datos.</p>
-        <a href="{% url 'registrarRecorridos' %}" class="btn btn-success">Acceder</a>
-      </div>
-    </div>
-  </div>
+  <!-- para agregar mas cards -->
 </div>
 
 

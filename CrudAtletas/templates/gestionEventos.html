@@ -1,0 +1,110 @@
+{% extends "Base.html" %}
+
+{% load widget_tweaks %}
+
+{% block tittle%}Gestion de Eventos {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-4 col-xl-4">
+        <h2 >Registro</h2>
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == "error"%}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+        {% else %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'registrarEvento' %}" method="POST">
+                    {% csrf_token %}
+                    <!-- Aquí van los campos del formulario para el evento -->
+                    <div class="mb-3">
+                        {{ form.rut.label_tag }}
+                        {% render_field form.rut class="form-control" %}
+                        {{form.rut.errors}}
+                    </div>
+
+                    <div class="mb-3">
+                        {{ form.fecha.label_tag }}
+                        {% render_field form.fecha class="form-control" %}
+                        {{form.fecha.errors}}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.ubicacion.label_tag }}
+                        {% render_field form.ubicacion class="form-control" %}
+                        {{form.ubicacion.errors}}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.carrera.label_tag }}
+                        {% render_field form.carrera class="form-control" %}
+                        {{form.carrera.errors}}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.salto.label_tag }}
+                        {% render_field form.salto class="form-control" %}
+                        {{form.salto.errors}}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.lanzamiento.label_tag }}
+                        {% render_field form.lanzamiento class="form-control" %}
+                        {{form.lanzamiento.errors}}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.prueba_combinada.label_tag }}
+                        {% render_field form.prueba_combinada class="form-control" %}
+                        {{form.prueba_combinada.errors}}
+                    </div>
+                    <button type="submit" class="btn btn-success">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
+        <h1>Listado De Eventos</h1>
+        <div class="table responsive py-2">
+            <table class="table table-hover table-dark">
+                <thead class="thead-dark">
+                    <tr>
+                        <!-- Aquí van los nombres de los campos del evento -->
+                        <th>ID</th>
+                        <th>Rut</th>
+                        <th>Fecha</th>
+                        <th>Ubicacion</th>
+                        <th>Carrera</th>
+                        <th>Salto</th>
+                        <th>Lanzamiento</th>
+                        <th>Prueba Combinada</th>
+                        <th colspan="3">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for evento in eventos %}
+                    <tr>
+                        <!-- Aquí van los valores de los campos del evento -->
+                        <td>{{evento.id}}</td>
+                        <td>{{evento.rut}}</td>
+                        <td>{{evento.fecha}}</td>
+                        <td>{{evento.ubicacion}}</td>
+                        <td>{{evento.get_carrera_display}}</td>
+                        <td>{{evento.get_salto_display}}</td>
+                        <td>{{evento.get_lanzamiento_display}}</td>
+                        <td>{{evento.get_prueba_combinada_display}}</td>
+                        <td><a href="{% url 'editarEvento' evento.id %}" class="btn btn-info">Editar</a></td>
+                        <td><a href="{% url 'eliminarEvento' evento.id %}" class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

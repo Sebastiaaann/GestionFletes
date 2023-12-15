@@ -1,0 +1,64 @@
+{% extends "Base.html" %}
+
+{% load widget_tweaks %}
+
+{% block tittle%}Gestion de Atletas {% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4 ">
+        <h2>Edicion de atletas</h2>
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.tags == "error"%}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+        {% else %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'editarAtleta' atletaID %}" method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.rut.label_tag }}
+                        {% render_field form.rut class="form-control" placeholder="Ej: 12.345.678-K" minlength="10" maxlength="12" %}
+                        {{form.rut.errors}}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.nombre.label_tag }}
+                        {% render_field form.nombre class="form-control" maxlength="30" %}
+                        {{form.nombre.errors}}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.apellido.label_tag }}
+                        {% render_field form.apellido class="form-control" maxlength="30" %}
+                        {{form.apellido.errors}}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.disciplina.label_tag }}
+                        {% render_field form.disciplina class="form-control" maxlength="30" %}
+                        {{form.disciplina.errors}}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.sexo.label_tag }}
+                        {% render_field form.sexo class="form-control" %}
+                        {{form.sexo.errors}}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.preferencias_competencia.label_tag }}
+                        {% render_field form.preferencias_competencia class="form-control" %}
+                        {{form.preferencias_competencia.errors}}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

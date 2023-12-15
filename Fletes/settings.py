@@ -38,13 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
-
-    'CrudVehiculos',
+    
     'Cuentas',
-    'CrudConductores',
-    'CrudMantenciones',
-    'CrudRecorridos',
     'Home',
+    'CrudAtletas',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,16 @@
+# requirements.txt
+
+# Framework Django
+django==3.2.10
+
+# Django Widget Tweaks
+django-widget-tweaks==1.4.10
+
+# Generación de PDF con ReportLab
+reportlab==3.6.1
+
+# Manipulación de archivos Excel con OpenPyXL
+openpyxl==3.0.17
+
+# Django REST framework
+djangorestframework==3.12.4

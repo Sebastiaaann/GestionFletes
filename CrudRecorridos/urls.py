@@ -7,4 +7,5 @@ urlpatterns = [
    path('editarRecorridos/<codigo>', views.editarRecorridos, name='editarRecorridos'),
    path('eliminarRecorridos/<codigo>', views.eliminarRecorridos, name='eliminarRecorridos'),
    path('edicionRecorridos/<codigo>', views.edicionRecorridos, name='edicionRecorridos'),
+   path('descargar_recorridos/', views.descargar_recorridos, name='descargar_recorridos'),
 ]

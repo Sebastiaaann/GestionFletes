@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Mantenciones
 from .forms import MantencionForm
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def registrarMantenciones(request):
     mantenciones = Mantenciones.objects.all()
     if request.method == 'POST':
@@ -38,3 +40,23 @@ def eliminarMantenciones(request,mantencionID):
     mantencion.delete()
     messages.success(request,'Mantencion Eliminada Correctamente!')
     return redirect('registrarMantenciones')
+
+#EXCEL
+
+from openpyxl import Workbook
+from django.http import HttpResponse
+
+def descargar_mantenciones(request):
+    mantenciones = Mantenciones.objects.all()
+    wb = Workbook()
+    ws = wb.active
+    ws.append(['ID', 'Nombre', 'Fecha', 'Detalle', 'Vehiculo'])  # Ajusta los campos según tu modelo
+
+    for mantencion in mantenciones:
+        ws.append([mantencion.mantencionID, mantencion.nombre, mantencion.fecha, mantencion.detalle, mantencion.vehiculo])  # Ajusta los campos según tu modelo
+
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="mantenciones.xlsx"'
+    wb.save(response)
+
+    return response

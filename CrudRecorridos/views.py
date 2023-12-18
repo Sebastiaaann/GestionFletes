@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Recorridos
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 # Create your views here.
 def registrarRecorridos(request):
     codigo = request.POST['codigoInput']
@@ -55,4 +58,23 @@ def eliminarRecorridos(request, codigo):
     recorrido.delete()
     messages.success(request, 'Recorrido eliminado exitosamente!')
     return redirect('homeRecorridos')
+
   
+#Excel
+from openpyxl import Workbook
+from django.http import HttpResponse
+
+def descargar_recorridos(request):
+    recorridos = Recorridos.objects.all()
+    wb = Workbook()
+    ws = wb.active
+    ws.append(['Codigo', 'Conductor', 'Fecha', 'Ruta', 'Carga Transportada', 'Detalles Recorrido'])
+
+    for recorrido in recorridos:
+        ws.append([recorrido.codigo, recorrido.conductor, recorrido.fecha, recorrido.ruta, recorrido.cargaTransportada, recorrido.detalleRecorridos])
+
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="recorridos.xlsx"'
+    wb.save(response)
+
+    return response

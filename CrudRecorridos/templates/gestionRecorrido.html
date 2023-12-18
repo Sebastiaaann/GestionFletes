@@ -40,8 +40,8 @@
     <div class="col-sm-12 col-md-6 col-lg-8 col-xl-8">
         <h1 >Listado De Recorridos</h1>
         <div class="table responsive py-2">
-            <table class="table table-striped">
-                <thead>
+            <table class="table table-hover table-dark">
+                <thead class="thead-dark">
                 <tr>
                     <th>#</th>
                     <th>Codigo</th>
@@ -69,6 +69,7 @@
                         <a href ="{%url 'edicionRecorridos' recorrido.codigo %}" class = "btn btn-info" >Editar </a>
                     </td>
                     <td><a href ="{%url 'eliminarRecorridos' recorrido.codigo %}" class = "btn btn-danger btnEliminacion" >Eliminar </a></td>
+                    <td></td>
                 </tr>
                 </tbody>
                 {% endfor %}

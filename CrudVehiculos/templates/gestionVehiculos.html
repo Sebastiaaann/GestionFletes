@@ -63,8 +63,8 @@
     <div class=" col-sm-12 col-md-6 col-lg-8 col-xl-8">
         <h1>Listado De Vehiculos</h1>
         <div class="table responsive py-2">
-            <table class="table table-striped">
-                <thead>
+            <table class="table table-hover table-dark">
+                <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
                         <th>Patente</th>
@@ -91,6 +91,7 @@
                                 class="btn btn-primary">Editar</a></td>
                         <td><a href="{% url 'eliminarVehiculos' vehiculo.vehiculoID %}"
                                 class="btn btn-danger btnEliminacion">Eliminar</a></td>
+                        <td></td>
                     </tr>
                     {% endfor %}
                 </tbody>

@@ -1,39 +1,31 @@
 {% extends "Base.html" %}
-
-{% block title %}Registro de Usuarios{% endblock %}
-
+{% block title %}Iniciar Sesión{% endblock %}
 {% block body %}
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <h2 class="card-title text-center mb-4">Inicio de Sesión</h2>
-
-          <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-
-            <div class="text-center mt-4">
-              <button type="submit" class="btn btn-success">Iniciar Sesión</button>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title text-center mb-4">Iniciar Sesión</h2>
+            <form method="post">
+              {% csrf_token %}
+              {% for field in form %}
+                <div class="form-group">
+                  <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                  <input type="{{ field.field.widget.input_type }}" class="form-control" id="{{ field.id_for_label }}" name="{{ field.html_name }}" {% if field.field.required %}required{% endif %}>
+                </div>
+              {% endfor %}
+              <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+              </div>
+            </form>
+            <div class="text-center mt-3">
+              <p class="mb-0">¿No tienes una cuenta?</p>
+              <a class="btn btn-success" href="{% url 'registro' %}" role="button">Registrar</a>
             </div>
-          </form>
-
-          <div class="text-center mt-3">
-            <p class="mb-0">¿Aún no tienes una cuenta?</p>
-            <a class="btn btn-primary" href="{% url 'registro' %}" role="button">Registrarse</a>
           </div>
         </div>
       </div>
-
-      {% if messages %}
-      {% for message in messages %}
-      <div class="alert alert-info mt-3">
-        {{ message }}
-      </div>
-      {% endfor %}
-      {% endif %}
     </div>
   </div>
-</div>
 {% endblock %}

@@ -17,3 +17,13 @@ def regitro(request):
     context = {'form': form}
 
     return render(request, 'registro.html', context)
+
+def login_view(request):
+    #código de inicio de sesión 
+    messages.success(request, 'Has iniciado sesión correctamente.')
+    return redirect('home')
+
+def logout_view(request):
+    #código de cierre de sesión 
+    messages.success(request, 'Has cerrado sesión correctamente.')
+    return redirect('login')

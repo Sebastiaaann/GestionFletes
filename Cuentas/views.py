@@ -13,7 +13,7 @@ def regitro(request):
             return redirect('login')
     else:
         form = RegistroUsuarioForm()
-    
+        messages.error(request, 'Error al crear usuario')
     context = {'form': form}
 
     return render(request, 'registro.html', context)

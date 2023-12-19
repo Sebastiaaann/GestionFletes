@@ -24,5 +24,6 @@ urlpatterns = [
     path('conductores/', include('CrudConductores.urls')),
     path('mantenciones/', include('CrudMantenciones.urls')),
     path('recorridos/',include('CrudRecorridos.urls')),
+    path('balance/',include('Balance.urls')),
     path('Home/', include('Home.urls')),
 ]

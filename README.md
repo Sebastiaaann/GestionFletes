@@ -1,20 +1,27 @@
 # GestionFletes
 
-
--- Primero Crear entorno VENV
 #   VENV
+-- Primero Crear entorno VENV
+
 python -m venv nombre_del_entorno
 
 nombre_del_entorno\Scripts\Activate
 
-listo
+# PIP Necesarios para que funcione
 
--- Instalar Requirements
-#   requirements
+pip install django
 
-pip install -r requirements.txt
+pip install django-widget-tweaks
 
--- Migraciones
+# PDF
+
+pip install reportlab
+
+# EXCEL
+
+pip install openpyxl
+
+
 # Hacer migraciones
 
 python manage.py migrate

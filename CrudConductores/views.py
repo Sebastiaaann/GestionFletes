@@ -2,7 +2,9 @@ from django.shortcuts import render,redirect
 from .models import Conductores
 from .forms import ConductoresForm
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def registrarConductores(request):
     conductores = Conductores.objects.all()
     if request.method == 'POST':
@@ -38,5 +40,26 @@ def eliminarConductores(request,conductorID):
     conductores.delete()
     messages.success(request, 'Conductor Eliminado Correctamente!')
     return redirect('registrarConductores')
+
+
+#EXCEL
+
+from openpyxl import Workbook
+from django.http import HttpResponse
+
+def descargar_conductores(request):
+    conductores = Conductores.objects.all()
+    wb = Workbook()
+    ws = wb.active
+    ws.append(['ID', 'Rut', 'Nombre', 'Apellido', 'Fecha Nacimiento', 'Direccion', 'Numero Licencia'])
+
+    for conductor in conductores:
+        ws.append([conductor.conductorID, conductor.rut, conductor.nombre, conductor.apellido, conductor.fechaNacimiento, conductor.direccion, conductor.licencia])
+
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="conductores.xlsx"'
+    wb.save(response)
+
+    return response
 
 

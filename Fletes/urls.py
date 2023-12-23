@@ -25,5 +25,6 @@ urlpatterns = [
     path('mantenciones/', include('CrudMantenciones.urls')),
     path('recorridos/',include('CrudRecorridos.urls')),
     path('balance/',include('Balance.urls')),
+    path('IngEgr/',include('IngresosEgresos.urls')),
     path('Home/', include('Home.urls')),
 ]

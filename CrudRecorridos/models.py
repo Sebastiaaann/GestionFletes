@@ -1,16 +1,18 @@
 from django.db import models
+from CrudConductores.models import Conductores
+from CrudVehiculos.models import Vehiculos
 
-# Create your models here.
 class Recorridos(models.Model):
-    codigo = models.CharField(primary_key=True, max_length=6)
-    conductor = models.CharField(max_length=70)
+    recorridoID = models.AutoField(primary_key=True)
+    conductor = models.ForeignKey(Conductores, on_delete=models.CASCADE)
+    vehiculo = models.ForeignKey(Vehiculos, on_delete=models.CASCADE)
     fecha = models.DateField()
-    ruta = models.CharField(max_length=70)
-    cargaTransportada = models.CharField(max_length=70)
-    detalleRecorridos = models.TextField(max_length=70)
-
+    direccionOrigen = models.CharField(max_length=50)
+    direccionDestino = models.CharField(max_length=50)
+    carga = models.TextField(max_length=100)
+    detalle = models.TextField(max_length=100, null=True)
 
     def __str__(self):
-        texto= "{0} {1} {2} {3} {4} {5}"
-        return texto.format(self.codigo, self.conductor, self.fecha, self.ruta, self.cargaTransportada, self.detalleRecorridos)
+        texto= "{0} {1} {2} {3} {4} {5} {6} {7}"
+        return texto.format(self.recorridoID, self.conductor, self.vehiculo, self.fecha, self.direccionOrigen, self.direccionDestino, self.carga, self.detalle)
     

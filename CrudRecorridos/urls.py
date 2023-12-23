@@ -2,10 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-   path('homeRecorridos/', views.homeRecorridos,name='homeRecorridos'),
    path('registrarRecorridos/', views.registrarRecorridos,name='registrarRecorridos'),
-   path('editarRecorridos/<codigo>', views.editarRecorridos, name='editarRecorridos'),
-   path('eliminarRecorridos/<codigo>', views.eliminarRecorridos, name='eliminarRecorridos'),
-   path('edicionRecorridos/<codigo>', views.edicionRecorridos, name='edicionRecorridos'),
-   path('descargar_recorridos/', views.descargar_recorridos, name='descargar_recorridos'),
+   path('editarRecorridos/<recorridoID>', views.editarRecorridos, name='editarRecorridos'),
+   path('eliminarRecorridos/<recorridoID>', views.eliminarRecorridos, name='eliminarRecorridos'),
+   path('descargarRecorridos/', views.descargarRecorridos, name='descargarRecorridos'),
 ]

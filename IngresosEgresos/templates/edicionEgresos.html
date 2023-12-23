@@ -1,0 +1,44 @@
+{% extends "Base.html" %}
+
+{% load widget_tweaks %}
+
+{% block tittle%}Gestion de Egresos{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+    {% if messages%}
+        {% for message in messages %}
+        <div class="alert alert-dismissible alert-success">
+            <strong class="text-dark"> {{message}}</strong>
+        </div>
+        {% endfor %}
+        {% endif %}
+        <h2>Editar Egresos</h2>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'editarEgresos' egresoID %}" method="post" class="mt-3">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        {{ form.valor.label_tag }}
+                        {% render_field form.valor class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.fecha.label_tag }}
+                        {% render_field form.fecha class="form-control" type="date" %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.recorrido.label_tag }}
+                        {% render_field form.recorrido class="form-control" %}
+                    </div>
+                    <div class="mb-3">
+                        {{ form.comentario.label_tag }}
+                        {% render_field form.comentario class="form-control" %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

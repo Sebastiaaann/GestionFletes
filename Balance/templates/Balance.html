@@ -1,0 +1,57 @@
+{% extends "Base.html" %}
+
+{% block tittle%}Balance{% endblock %}
+
+{% block body %}
+<div class="row">
+    <div class='card col-md-4 p-4 mx-auto'>
+        <div class='card-body'>
+            <h3 class="card-title">Grafico Ejemplo</h3>
+            <canvas id="myBarChart" width="200" height="200"></canvas>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var data = {
+                        labels: ['Etiqueta 1', 'Etiqueta 2', 'Etiqueta 3'],
+                        datasets: [{
+                            label: 'Datos de ejemplo',
+                            data: [30, 50, 20],
+                            backgroundColor: ['red', 'blue', 'green']
+                        }]
+                    };
+                    var ctx = document.getElementById('myBarChart').getContext('2d');
+                    var myBarChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: data,
+                        options: {}
+                    });
+                });
+            </script>
+        </div>
+    </div>
+    <div class='card col-md-4 p-2 mx-auto'>
+        <div class='card-body'>
+            <h3 class="card-title">Vehiculos Disponibles</h3>
+            <canvas id="a" width="200" height="200"></canvas>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var vehiculosInactivos = {{ vehiculos_inactivos }};
+                    var vehiculosActivos = {{ vehiculos_activos }};
+                    var data = {
+                        labels: ['Vehiculos Inactivos', 'Vehiculos activos'],
+                        datasets: [{
+                            data: [vehiculosInactivos, vehiculosActivos],
+                            backgroundColor: ['gray', 'green']
+                        }]
+                    };
+                    var ctx = document.getElementById('a').getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'pie',
+                        data: data,
+                        options: {}
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>
+{% endblock %}

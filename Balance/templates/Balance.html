@@ -6,16 +6,19 @@
 <div class="row">
     <div class='card col-md-4 p-4 mx-auto'>
         <div class='card-body'>
-            <h3 class="card-title">Grafico Ejemplo</h3>
+            <h3 class="card-title">Balance</h3>
             <canvas id="myBarChart" width="200" height="200"></canvas>
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
+                    var ingresosTotales = {{ total_ingresos }}
+                    var egresosTotales = {{ total_egresos }}
+                    var saldoTotal = {{ saldo_total }}
                     var data = {
-                        labels: ['Etiqueta 1', 'Etiqueta 2', 'Etiqueta 3'],
+                        labels: ['Ingresos total', 'Egresos total', 'Veneficios total'],
                         datasets: [{
-                            label: 'Datos de ejemplo',
-                            data: [30, 50, 20],
-                            backgroundColor: ['red', 'blue', 'green']
+                            label: 'Balance Flete',
+                            data: [ingresosTotales, egresosTotales, saldoTotal],
+                            backgroundColor: ['green', 'red', 'blue']
                         }]
                     };
                     var ctx = document.getElementById('myBarChart').getContext('2d');

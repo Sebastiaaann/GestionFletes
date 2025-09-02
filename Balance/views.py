@@ -5,27 +5,7 @@ from django.db.models import Sum
 from IngresosEgresos.models import Ingresos, Egresos
 from CrudRecorridos.models import Recorridos
 from CrudConductores.models import Conductores
-python manage.py makemigrations CrudVehiculos[
-  [-41.4691, -72.9424],  // Puerto Montt centro
-  [-41.5120, -73.0160],  // Cruce Ruta 5 y V-85
-  [-41.5630, -73.0860],  // Cruce V-85 y V-65
-  [-41.6167, -73.1286]   // Calbuco centro
-][
-  [-41.4691, -72.9424],  // Puerto Montt centro
-  [-41.5120, -73.0160],  // Cruce Ruta 5 y V-85
-  [-41.5630, -73.0860],  // Cruce V-85 y V-65
-  [-41.6167, -73.1286]   // Calbuco centro
-][
-  [-41.4691, -72.9424],  // Puerto Montt centro
-  [-41.5120, -73.0160],  // Cruce Ruta 5 y V-85
-  [-41.5630, -73.0860],  // Cruce V-85 y V-65
-  [-41.6167, -73.1286]   // Calbuco centro
-][
-  [-41.4691, -72.9424],  // Puerto Montt centro
-  [-41.5120, -73.0160],  // Cruce Ruta 5 y V-85
-  [-41.5630, -73.0860],  // Cruce V-85 y V-65
-  [-41.6167, -73.1286]   // Calbuco centro
-]from django.utils import timezone
+from django.utils import timezone
 from collections import OrderedDict
 import datetime
 

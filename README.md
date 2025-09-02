@@ -5,6 +5,9 @@
 
 python -m venv nombre_del_entorno
 
+# En Windows PowerShell, si aparece error de ejecución de scripts:
+# Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
 nombre_del_entorno\Scripts\Activate
 
 # PIP Necesarios para que funcione

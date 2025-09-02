@@ -13,7 +13,7 @@
             <h4>Dealertouch</h4>
         </div>
         <ul class="nav flex-column">
-            <li class="nav-item mb-2"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item mb-2"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
             <li class="nav-item mb-2"><a class="nav-link active" href="#">Add New Car</a></li>
             <li class="nav-item mb-2"><a class="nav-link" href="#">Car List</a></li>
             <li class="nav-item mb-2"><a class="nav-link" href="#">Calendar</a></li>
@@ -46,7 +46,7 @@
             <form id="vehiculoForm" action="{% url 'registarVehiculos' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label">Car Number</label>
+                    <label class="col-sm-2 col-form-label">Patente</label>
                     <div class="col-sm-6">
                         {% render_field form.patente class="form-control" placeholder="AA-229-DB" %}
                         {{ form.patente.errors }}
@@ -54,12 +54,12 @@
                 </div>
 
                 <div class="mb-3 row">
-                    <label class="col-sm-2 col-form-label">Manufacture Year</label>
+                    <label class="col-sm-2 col-form-label">Fecha de Adquisición</label>
                     <div class="col-sm-4">
                         {% render_field form.fechaAdquisicion class="form-control" type="date" %}
                         {{ form.fechaAdquisicion.errors }}
                     </div>
-                    <label class="col-sm-2 col-form-label">Car Model</label>
+                    <label class="col-sm-2 col-form-label">Modelo</label>
                     <div class="col-sm-4">
                         {% render_field form.modelo class="form-control" %}
                         {{ form.modelo.errors }}

@@ -22,7 +22,7 @@
             {% endfor %}
         {% endif %}
 
-        <form id="editarRecForm" action="{% url 'registrarRecorridos' recorridoID %}" method="post">
+        <form id="editarRecForm" action="{% url 'editarRecorridos' recorridoID %}" method="post">
             {% csrf_token %}
             <div class="mb-3">{{ form.conductor.label_tag }}{% render_field form.conductor class="form-control" %}</div>
             <div class="mb-3">{{ form.vehiculo.label_tag }}{% render_field form.vehiculo class="form-control" %}</div>
@@ -33,5 +33,3 @@
             <div class="mb-3">{{ form.detalle.label_tag }}{% render_field form.detalle class="form-control" %}</div>
         </form>
     {% endblock %}
-
-{% endblock %}

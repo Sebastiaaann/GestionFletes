@@ -5,6 +5,29 @@ from django.db.models import Sum
 from IngresosEgresos.models import Ingresos, Egresos
 from CrudRecorridos.models import Recorridos
 from CrudConductores.models import Conductores
+python manage.py makemigrations CrudVehiculos[
+  [-41.4691, -72.9424],  // Puerto Montt centro
+  [-41.5120, -73.0160],  // Cruce Ruta 5 y V-85
+  [-41.5630, -73.0860],  // Cruce V-85 y V-65
+  [-41.6167, -73.1286]   // Calbuco centro
+][
+  [-41.4691, -72.9424],  // Puerto Montt centro
+  [-41.5120, -73.0160],  // Cruce Ruta 5 y V-85
+  [-41.5630, -73.0860],  // Cruce V-85 y V-65
+  [-41.6167, -73.1286]   // Calbuco centro
+][
+  [-41.4691, -72.9424],  // Puerto Montt centro
+  [-41.5120, -73.0160],  // Cruce Ruta 5 y V-85
+  [-41.5630, -73.0860],  // Cruce V-85 y V-65
+  [-41.6167, -73.1286]   // Calbuco centro
+][
+  [-41.4691, -72.9424],  // Puerto Montt centro
+  [-41.5120, -73.0160],  // Cruce Ruta 5 y V-85
+  [-41.5630, -73.0860],  // Cruce V-85 y V-65
+  [-41.6167, -73.1286]   // Calbuco centro
+]from django.utils import timezone
+from collections import OrderedDict
+import datetime
 
 @login_required
 def balance(request):
@@ -33,6 +56,19 @@ def balance(request):
     if total_vehiculos > 0:
         utilizacion = round((vehiculos_activos / total_vehiculos) * 100)
 
+    # Ingresos/Egresos por mes (últimos 12 meses)
+    hoy = timezone.now().date()
+    meses = [(hoy - datetime.timedelta(days=30*i)).strftime('%Y-%m') for i in reversed(range(12))]
+    ingresos_por_mes = OrderedDict((mes, 0) for mes in meses)
+    egresos_por_mes = OrderedDict((mes, 0) for mes in meses)
+    for ingreso in ingresos:
+        mes = ingreso.fecha.strftime('%Y-%m')
+        if mes in ingresos_por_mes:
+            ingresos_por_mes[mes] += ingreso.valor
+    for egreso in egresos:
+        mes = egreso.fecha.strftime('%Y-%m')
+        if mes in egresos_por_mes:
+            egresos_por_mes[mes] += egreso.valor
     context = {
         'total_ingresos': total_ingresos,
         'total_egresos': total_egresos,
@@ -45,4 +81,9 @@ def balance(request):
         'recientes': recientes,
         'utilizacion': utilizacion,
     }
+    context.update({
+        'ingresos_por_mes': list(ingresos_por_mes.values()),
+        'egresos_por_mes': list(egresos_por_mes.values()),
+        'meses_labels': list(ingresos_por_mes.keys()),
+    })
     return render(request, 'Dashboard.html', context)

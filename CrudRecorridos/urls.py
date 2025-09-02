@@ -6,4 +6,6 @@ urlpatterns = [
    path('editarRecorridos/<recorridoID>', views.editarRecorridos, name='editarRecorridos'),
    path('eliminarRecorridos/<recorridoID>', views.eliminarRecorridos, name='eliminarRecorridos'),
    path('descargarRecorridos/', views.descargarRecorridos, name='descargarRecorridos'),
+   path('detalleRecorrido/<recorridoID>/', views.detalleRecorrido, name='detalleRecorrido'),
+   path('detalleGastoBencina/<recorridoID>/', views.detalleGastoBencina, name='detalleGastoBencina'),
 ]

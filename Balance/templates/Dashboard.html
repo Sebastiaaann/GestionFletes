@@ -61,6 +61,10 @@
   </div>
 
   <div class="col-12 mt-3">
+    <div class="card p-3 mb-3">
+      <h5>Ingresos y Egresos por Mes</h5>
+      <canvas id="barChart" data-meses="{{ meses_labels|join:',' }}" data-ingresos="{{ ingresos_por_mes|join:',' }}" data-egresos="{{ egresos_por_mes|join:',' }}"></canvas>
+    </div>
     <div class="card p-3">
       <h5>Financial Summary</h5>
       <div class="row">
@@ -74,7 +78,7 @@
 </div>
 
 <script>
-// Chart.js donut using data-* attributes on the canvas to avoid template parsing issues in JS
+// Chart.js donut usando data-* attributes
 const canvas = document.getElementById('kpiDonut');
 if (canvas) {
   const ingresos = Number(canvas.dataset.ingresos) || 0;
@@ -90,6 +94,38 @@ if (canvas) {
       }]
     },
     options: { responsive:true }
+  });
+}
+// Chart.js bar para ingresos/egresos por mes
+const barChart = document.getElementById('barChart');
+if (barChart) {
+  const meses = barChart.dataset.meses.split(',');
+  const ingresosMes = barChart.dataset.ingresos.split(',').map(Number);
+  const egresosMes = barChart.dataset.egresos.split(',').map(Number);
+  new Chart(barChart, {
+    type: 'bar',
+    data: {
+      labels: meses,
+      datasets: [
+        {
+          label: 'Ingresos',
+          data: ingresosMes,
+          backgroundColor: '#4CAF50'
+        },
+        {
+          label: 'Egresos',
+          data: egresosMes,
+          backgroundColor: '#F44336'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: { title: { display: true, text: 'Mes' } },
+        y: { title: { display: true, text: 'Monto ($)' }, beginAtZero: true }
+      }
+    }
   });
 }
 </script>

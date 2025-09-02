@@ -55,7 +55,7 @@ def registrarEgresos(request):
             messages.error(request, 'Error al registrar el Egreso. Por favor, verificar los datos.')
             return render(request,'gestionEgresos.html', {"form":form, "egresos":egresos})
     else:
-        form = IngresosForm()
+        form = EgresosForm()
         return render(request,'gestionEgresos.html', {"form":form, "egresos":egresos})
 
 def editarEgresos(request, egresoID):

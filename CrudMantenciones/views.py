@@ -50,10 +50,12 @@ def descargar_mantenciones(request):
     mantenciones = Mantenciones.objects.all()
     wb = Workbook()
     ws = wb.active
-    ws.append(['ID', 'Nombre', 'Fecha', 'Detalle', 'Vehiculo'])  # Ajusta los campos según tu modelo
+    # Usar los campos reales del modelo Mantenciones
+    ws.append(['ID', 'FechaInicio', 'Duracion', 'Valor', 'Vehiculo'])
 
     for mantencion in mantenciones:
-        ws.append([mantencion.mantencionID, mantencion.nombre, mantencion.fecha, mantencion.detalle, mantencion.vehiculo])  # Ajusta los campos según tu modelo
+        vehiculo_text = f"{mantencion.vehiculo.marca} {mantencion.vehiculo.patente}" if mantencion.vehiculo else ''
+        ws.append([mantencion.mantencionID, mantencion.fechaInicio, mantencion.duracion, mantencion.valor, vehiculo_text])
 
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="mantenciones.xlsx"'

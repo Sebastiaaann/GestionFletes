@@ -37,8 +37,8 @@ def editarRecorridos(request, recorridoID):
         return render(request, 'edicionRecorrido.html', {'form':form,"recorridoID":recorridoID})
 
 def eliminarRecorridos(request,recorridoID):
-    mantencion = Recorridos.objects.get(recorridoID=recorridoID)
-    mantencion.delete()
+    recorrido = Recorridos.objects.get(recorridoID=recorridoID)
+    recorrido.delete()
     messages.success(request,'Recorrido Eliminado Correctamente!')
     return redirect('registrarRecorridos')
 

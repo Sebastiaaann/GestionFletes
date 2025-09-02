@@ -6,3 +6,39 @@ th, td{
 body{
     background-color: #F9F6EE;
 }
+
+/* Dashboard / panel styles */
+.bg-light {
+    background-color: #fbfbfc !important;
+}
+
+.card {
+    border: 0;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    border-radius: 12px;
+}
+
+.nav-link.active {
+    background: transparent;
+    font-weight: 600;
+    color: #0d6efd !important;
+}
+
+/* Upload area */
+.border.rounded.p-4 {
+    border-style: dashed !important;
+}
+
+/* Small responsive tweaks */
+@media (max-width: 768px){
+    .col-md-3{ padding:18px !important }
+}
+
+/* Form labels */
+.col-form-label{ font-weight:600 }
+
+/* Buttons */
+.btn-primary{ background: #2563eb; border-color:#2563eb }
+
+/* Table */
+.table-hover tbody tr:hover { background: rgba(37,99,235,0.04) }

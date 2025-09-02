@@ -1,0 +1,97 @@
+{% extends "Base.html" %}
+
+{% load static %}
+
+{% block tittle %}Dashboard{% endblock %}
+
+{% block body %}
+<div class="row">
+  <div class="col-12 mb-3">
+    <h1>Logistics Dashboard</h1>
+  </div>
+
+  <div class="col-md-3 mb-3">
+    <div class="card p-3">
+      <h5>Active Vehicles</h5>
+      <h2>{{ vehiculos_activos }}</h2>
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <div class="card p-3">
+      <h5>On-Time Rate (placeholder)</h5>
+      <h2>--%</h2>
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <div class="card p-3">
+      <h5>Fleet Utilization</h5>
+      <h2>{{ utilizacion }}%</h2>
+    </div>
+  </div>
+  <div class="col-md-3 mb-3">
+    <div class="card p-3">
+      <h5>Driver Count</h5>
+      <h2>{{ total_conductores }}</h2>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <div class="card p-3 mb-3">
+      <h5>Map (placeholder)</h5>
+      <div style="height:360px; background:#f5f5f5; border-radius:8px; display:flex; align-items:center; justify-content:center;">
+        <small class="text-muted">Map placeholder - integrate Leaflet/Mapbox here</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-4">
+    <div class="card p-3 mb-3">
+      <canvas id="kpiDonut" data-ingresos="{{ total_ingresos|default:0 }}" data-egresos="{{ total_egresos|default:0 }}" data-inactivos="{{ vehiculos_inactivos|default:0 }}"></canvas>
+    </div>
+    <div class="card p-3">
+      <h6>Recent Recorridos</h6>
+      <ul class="list-group">
+        {% for r in recientes %}
+          <li class="list-group-item small">{{ r.fecha }} — {{ r.vehiculo }} — {{ r.conductor }}</li>
+        {% empty %}
+          <li class="list-group-item small">No recorridos</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-12 mt-3">
+    <div class="card p-3">
+      <h5>Financial Summary</h5>
+      <div class="row">
+        <div class="col-md-3"><strong>Ingresos:</strong> ${{ total_ingresos }}</div>
+        <div class="col-md-3"><strong>Egresos:</strong> ${{ total_egresos }}</div>
+        <div class="col-md-3"><strong>Saldo:</strong> ${{ saldo_total }}</div>
+        <div class="col-md-3"><strong>Recorridos:</strong> {{ total_recorridos }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Chart.js donut using data-* attributes on the canvas to avoid template parsing issues in JS
+const canvas = document.getElementById('kpiDonut');
+if (canvas) {
+  const ingresos = Number(canvas.dataset.ingresos) || 0;
+  const egresos = Number(canvas.dataset.egresos) || 0;
+  const inactivos = Number(canvas.dataset.inactivos) || 0;
+  new Chart(canvas, {
+    type: 'doughnut',
+    data: {
+      labels: ['Ingresos','Egresos','Inactive Vehicles'],
+      datasets: [{
+        data: [ingresos, egresos, inactivos],
+        backgroundColor: ['#4CAF50','#F44336','#FFC107']
+      }]
+    },
+    options: { responsive:true }
+  });
+}
+</script>
+
+{% endblock %}
